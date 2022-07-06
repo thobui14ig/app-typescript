@@ -19,10 +19,9 @@ function Nav() {
                         </div>
                         <div className="hidden md:block">
                             <div className="ml-10 flex items-baseline space-x-4">
-                                <p
-                                    className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                >
-                                    <NavLink activeClassName="active" className="nav-link" to="/" >Trang chủ</NavLink>
+
+                            <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <NavLink activeClassName="active" className="nav-link" to="/home" >Home</NavLink>
                                 </p>
 
                                 <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -30,6 +29,9 @@ function Nav() {
                                 </p>
                                 <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                     <NavLink activeClassName="active" className="nav-link" to="/post" >Bài viết</NavLink>
+                                </p>
+                                <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <NavLink activeClassName="active" className="nav-link" to="/music" >Nghe nhạc</NavLink>
                                 </p>
                             </div>
                         </div>
