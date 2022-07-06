@@ -28,6 +28,9 @@ function Nav() {
                                 <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                     <NavLink activeClassName="active" className="nav-link" to="/login" >Login</NavLink>
                                 </p>
+                                <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <NavLink activeClassName="active" className="nav-link" to="/post" >Bài viết</NavLink>
+                                </p>
                             </div>
                         </div>
                         </div>
@@ -98,6 +101,9 @@ function Nav() {
 
                             <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                 <NavLink activeClassName="active" className="nav-link" to="/login" >Login</NavLink>
+                            </p>
+                            <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <NavLink activeClassName="active" className="nav-link" to="/post" >Bài viết</NavLink>
                             </p>
                         </div>
                         </div>
