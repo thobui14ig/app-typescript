@@ -21,7 +21,7 @@ function Nav() {
                             <div className="ml-10 flex items-baseline space-x-4">
 
                             <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    <NavLink activeClassName="active" className="nav-link" to="/home" >Home</NavLink>
+                                    <NavLink activeClassName="active" className="nav-link" to="/" >Home</NavLink>
                                 </p>
 
                                 <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -32,6 +32,9 @@ function Nav() {
                                 </p>
                                 <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
                                     <NavLink activeClassName="active" className="nav-link" to="/music" >Nghe nhạc</NavLink>
+                                </p>
+                                <p className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                    <NavLink activeClassName="active" className="nav-link" to="/appnhahang" >App nhà hàng</NavLink>
                                 </p>
                             </div>
                         </div>

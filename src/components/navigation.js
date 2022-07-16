@@ -1,5 +1,5 @@
-import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AppNhaHang from '../pages/AppNhaHang';
 import Home from '../pages/Home/Home';
 import Music from '../pages/Music';
 import Post from '../pages/Post';
@@ -29,6 +29,10 @@ function Navigation() {
           <Route path="/music">
             <Music />
           </Route>
+          <Route path="/appnhahang">
+            <AppNhaHang />
+          </Route>
+
       </Switch>   
     </Router>
   )
