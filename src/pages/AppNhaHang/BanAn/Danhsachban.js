@@ -9,7 +9,6 @@ function DanhSachBan() {
     useEffect(() => {
       const fetch = async() => {
         const data = await getAllBan();
-        console.log(data)
         setBan(data)
       }
       fetch();

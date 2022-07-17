@@ -7,7 +7,9 @@ const ApiConstants = {
     DANHMUC: 'danhmuc',
     BAN:'ban',
     ORDER:'order',
-    ORDER_DETAILS: 'orderDetails'
+    ORDER_DETAILS: 'orderDetails',
+    HOAN_THANH: 'hoantat',
+
 
 }
 

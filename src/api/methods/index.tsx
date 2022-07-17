@@ -29,7 +29,6 @@ export default async function api(path: string, params = {},method: string){
         }
     } 
 
-
     return axios(options).then((resp) => {
         return resp.data
     }).then((json) => json)

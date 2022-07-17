@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import { createOrder, createProduct, CRUDOrder } from '../../../api/methods/order.method';
 import { CRUDSanpham } from '../../../api/methods/sanpham.method';
 import './order.scss';
+import Xuly from './Xuly';
 const order = {
   sanphamId: '', soluong:''
 }
@@ -20,6 +21,13 @@ function Order() {
   const datagridRef = useRef();
   const [sanpham, setSanpham] = useState(null)
   const [orderId, setOrderId] = useState(0)
+  const [orderLenght, setLengthOrder] = useState(0)
+  const [checkThanhtoan, setCheckthanhtoan] = useState(0)
+  
+
+
+
+  
 
 
   useEffect(() => {
@@ -67,8 +75,12 @@ function Order() {
   })
 
   const sendRequest = async(method = 'GET', data = {}) => {
+     
       if (method === 'GET') {
           const data = await CRUDOrder(method, null, id)
+          setCheckthanhtoan(data[0]?.isThanhtoan)
+
+          setLengthOrder(data[0]?.orderDetails.length)
           return data[0]?.orderDetails
       }
       if (data) {
@@ -89,10 +101,7 @@ function Order() {
     return sanpham?.gia * soluong
   }
 
-  const handleHuy = () => {
-    console.log(datagridRef.current);
-    datagridRef.current.instance.refresh();  
-  }
+
 
   return (
       <>
@@ -154,35 +163,7 @@ function Order() {
                     valueFormat="currency" />
                 </Summary>
             </DataGrid>
-            <div className='xuly'>
-              <div className='button'>
-                <Button
-                  width={120}
-                  text="Thanh toán"
-                  type="default"
-                  stylingMode="contained"
-    
-                />                
-              </div>
-              <div className='button'>
-                <Button
-                  width={120}
-                  text="Hoàn thành"
-                  type="default"
-                  stylingMode="contained"
-    
-                />
-                 </div>
-                 <div className='button'>
-                <Button
-                  width={120}
-                  text="Hủy"
-                  type="default"
-                  stylingMode="contained"
-                  onClick={() => handleHuy()}
-                />
-                 </div>
-            </div>
+            <Xuly orderId={orderId} orderLenght={orderLenght} thanhtoanReturn={checkThanhtoan}/>
 
 
 

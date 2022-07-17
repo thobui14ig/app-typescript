@@ -30,3 +30,18 @@ export const CRUDOrder = async(method, data = null, id) => {
   }
 }
 
+
+export const hoanthanhdonhang = async(data) => {
+  //xóa dữ liệu bảng order_details
+  await api(ApiConstants.ORDER_DETAILS + '/deleteOrder' , data, 'POST');
+  //xóa dữ liệu bảng order
+  await api(ApiConstants.ORDER + `/${data.orderId}`, null, 'DELETE');
+
+  //insert dữ  liệu hoàn tất vào bảng hoàn tất
+  return api(ApiConstants.HOAN_THANH, data, 'POST');
+}
+
+export const thanhtoan = (id) => {
+  return api(ApiConstants.ORDER + `/${id}`, { isThanhtoan: 1 }, "PUT");
+}
+
