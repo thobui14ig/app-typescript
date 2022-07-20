@@ -2,8 +2,10 @@ import { Button } from 'devextreme-react';
 import { Popup, ToolbarItem } from 'devextreme-react/popup';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { hoanthanhdonhang, thanhtoan } from '../../../api/methods/order.method';
-function Xuly({orderId, orderLenght, thanhtoanReturn}) {
+import { hoanthanhdonhang, huy, thanhtoan } from '../../../api/methods/order.method';
+import { useAppNhaHang } from '../../../context/appnhahang.context';
+function Xuly({orderId, orderLenght, thanhtoanReturn, total}) {
+    const {setRender, render} = useAppNhaHang()
     const history = useHistory();
     const [visible, setVisible] = useState(false)
     const [thongbao, setThongbao] = useState("")
@@ -15,7 +17,6 @@ function Xuly({orderId, orderLenght, thanhtoanReturn}) {
 
   
     useEffect(() => {
-        console.log(11111111111, orderLenght, +thanhtoanReturn)
         if(orderLenght > 0 && +thanhtoanReturn === 0){
             setIshuy(false)
             setIsThanhtoan(false)
@@ -34,6 +35,7 @@ function Xuly({orderId, orderLenght, thanhtoanReturn}) {
 
 
     const handleXacnhan = (key) => {
+        
         setVisible(true)
         if(key === 1){
             setThongbao('thanh toán')
@@ -51,7 +53,8 @@ function Xuly({orderId, orderLenght, thanhtoanReturn}) {
         }
     }
 
-    const handleXacnhanXuly = () => {
+    const handleXacnhanXuly =async () => {
+       
         setVisible(false)
         //thanh toán đơn hàng
         if(key === 1){
@@ -61,8 +64,10 @@ function Xuly({orderId, orderLenght, thanhtoanReturn}) {
             setIshuy(true)
         }
         //hoàn thành đơn hàng
-        if(key === 2){
-            hoanthanhdonhang({ orderId: orderId })
+        if(key === 2 || key === 3){
+            if(key === 2) await hoanthanhdonhang({ orderId: orderId, tongtien: total })
+            if(key === 3) await huy(orderId)
+            setRender(!render)
             history.push(`/appnhahang/danhsachban`)
         }
     }
