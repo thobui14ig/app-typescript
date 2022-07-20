@@ -45,3 +45,15 @@ export const thanhtoan = (id) => {
   return api(ApiConstants.ORDER + `/${id}`, { isThanhtoan: 1 }, "PUT");
 }
 
+export const huy = (id) => {
+  return api(ApiConstants.ORDER + `/${id}`, null, "DELETE");
+}
+
+export const getDoanhThuNgay = (id) => {
+  return api(ApiConstants.HOAN_THANH + '/doanhthungay', null, "GET");
+}
+
+
+
+
+

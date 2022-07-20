@@ -11,23 +11,32 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { createOrder, createProduct, CRUDOrder } from '../../../api/methods/order.method';
 import { CRUDSanpham } from '../../../api/methods/sanpham.method';
+import { useAppNhaHang } from '../../../context/appnhahang.context';
 import './order.scss';
 import Xuly from './Xuly';
 const order = {
   sanphamId: '', soluong:''
 }
+
+const tongtien = (data) => {
+  let total = 0;
+  data.map(item => {
+    total = total + (item.soluong * +item.sanpham.gia)
+    
+  })
+
+  return total;
+}
 function Order() {
+  const {setRender, render} = useAppNhaHang()
+
   const { id } = useParams();
   const datagridRef = useRef();
   const [sanpham, setSanpham] = useState(null)
   const [orderId, setOrderId] = useState(0)
   const [orderLenght, setLengthOrder] = useState(0)
   const [checkThanhtoan, setCheckthanhtoan] = useState(0)
-  
-
-
-
-  
+  const [total, setTotal] = useState(1)
 
 
   useEffect(() => {
@@ -37,7 +46,6 @@ function Order() {
     }
     fetch()
   }, []);
-
 
   //mỗi khi vào chi tiết bàn thì kiểm tra nếu bàn đã order thì trả vè idOrder
   //ngược lại nếu chưa order thì tạo cho nó 1 order mới
@@ -79,8 +87,11 @@ function Order() {
       if (method === 'GET') {
           const data = await CRUDOrder(method, null, id)
           setCheckthanhtoan(data[0]?.isThanhtoan)
-
           setLengthOrder(data[0]?.orderDetails.length)
+          const totalReturn = tongtien(data[0]?.orderDetails)
+          setTotal(totalReturn)
+
+
           return data[0]?.orderDetails
       }
       if (data) {
@@ -94,10 +105,12 @@ function Order() {
       ...order, orderId: orderId
     }, id)
     datagridRef.current.instance.refresh(); 
+    setRender(!render)
   }
 
   const thanhtien = (data) => {
     const { sanpham, soluong } = data.data;
+    // setTotal(total * (sanpham?.gia * soluong))
     return sanpham?.gia * soluong
   }
 
@@ -105,7 +118,7 @@ function Order() {
 
   return (
       <>
-          <h1 style={{ fontSize: "20px", fontWeight: 'bold' }}>Bàn số: {id}</h1>
+          <h1 style={{ fontSize: "20px", fontWeight: 'bold', marginBottom: 10 }}>Bàn số: {id}</h1>
         
           <Form formData={order}>
                 <Item caption={""} editorType={"dxSelectBox"} dataField="sanphamId" editorOptions={{dataSource: newSanpham, searchEnabled: true, displayExpr: "name", valueExpr: 'id', searchMode: 'contains'}}>
@@ -155,15 +168,15 @@ function Order() {
                 <Column caption={"Đơn vi"}  dataField="sanpham.donvi"></Column>
 
                 <Column caption={"Thành tiền"} dataField={"thanhtien"} cellRender={thanhtien}></Column>
-
-                <Summary>
-                  <TotalItem
-                    column="sanpham.gia"
-                    summaryType="sum"
-                    valueFormat="currency" />
-                </Summary>
+               
             </DataGrid>
-            <Xuly orderId={orderId} orderLenght={orderLenght} thanhtoanReturn={checkThanhtoan}/>
+            <div style={{ fontSize: "20", fontWeight: "bold", marginTop: 20,marginBottom: 20, }}>Tổng tiền: {total.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</div>
+            <Xuly
+              orderId={orderId} 
+              orderLenght={orderLenght}
+              thanhtoanReturn={checkThanhtoan}
+              total={total}
+            />
 
 
 

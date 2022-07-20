@@ -6,6 +6,8 @@ const menu = [
   {id: 1, name: 'Danh mục', key:'danhmuc'},
   {id: 1, name: 'Danh sách bàn', key:'danhsachban'},
   {id: 1, name: 'Nhập kho', key:'nhapkho'},
+  {id: 1, name: 'Thống kê', key:'thongke'},
+
 
   
 

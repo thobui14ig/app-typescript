@@ -1,18 +1,13 @@
 import 'devextreme-react/text-area';
-import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getAllBan } from '../../../api/methods/ban.method';
+import { useAppNhaHang } from '../../../context/appnhahang.context';
 import './order.css';
+
+
 function DanhSachBan() {
-    const [ban, setBan] = useState(null);
+  const {ban} = useAppNhaHang()
+  
     const history = useHistory();
-    useEffect(() => {
-      const fetch = async() => {
-        const data = await getAllBan();
-        setBan(data)
-      }
-      fetch();
-    }, []);
     const handleChonban = async(number) => {
       history.push(`/appnhahang/order/${number}`)
     }
