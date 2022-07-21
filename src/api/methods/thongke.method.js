@@ -11,3 +11,8 @@ export const getDoanhthutuan = async(start, end) => {
     return api(ApiConstants.HOAN_THANH + `/doanhthutuan/${start}/${end}`);
     
 }
+
+export const getDoanhthunam = async(year) => {
+    return api(ApiConstants.HOAN_THANH + `/doanhthunam/${year}`);
+    
+}
