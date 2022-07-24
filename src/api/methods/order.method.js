@@ -7,7 +7,7 @@ export const createOrder = (method, data) => {
 }
 
 export const createProduct = (method, data) => {
-  return api(ApiConstants.ORDER_DETAILS, data, method);
+  return api(ApiConstants.ORDER_DETAILS + '/themmot', data, method);
 }
 
 export const CRUDOrder = async(method, data = null, id) => {
@@ -16,6 +16,7 @@ export const CRUDOrder = async(method, data = null, id) => {
         return api(ApiConstants.ORDER + `?join=ban||name&join=orderDetails||sanphamId,soluong&join=orderDetails.sanpham||name,gia,donvi&filter=banId||$eq||${id}`, null, method);
         
       case "POST":
+        
         return api(ApiConstants.ORDER_DETAILS, data.values, method)
 
 
