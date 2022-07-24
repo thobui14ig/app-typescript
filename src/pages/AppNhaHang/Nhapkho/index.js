@@ -1,7 +1,7 @@
 import { Button } from 'devextreme-react';
 import { Label } from 'devextreme-react/data-grid';
 import { Form, Item } from 'devextreme-react/form';
-import { nhapkho } from '../../../api/methods/sanpham.method';
+import { nhapkho } from '../../../api/methods/kho.method';
 import { useAppNhaHang } from '../../../context/appnhahang.context';
 
 const sanpham = {
