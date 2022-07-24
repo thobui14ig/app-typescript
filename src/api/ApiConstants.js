@@ -9,6 +9,7 @@ const ApiConstants = {
     ORDER:'order',
     ORDER_DETAILS: 'orderDetails',
     HOAN_THANH: 'hoantat',
+    KHO: 'kho'
 
 
 }

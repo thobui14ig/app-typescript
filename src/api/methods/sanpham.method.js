@@ -30,6 +30,4 @@ export const CRUDSanpham = async(method, data = null, startDate = null, endDate 
     
   }
 
-export const nhapkho = (sanpham) => {
-    return api(ApiConstants.SANPHAM +  `/nhapkho/${sanpham.sanphamId}`, {soluong: sanpham.soluong}, 'POST')
-}
+
