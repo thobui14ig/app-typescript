@@ -28,24 +28,15 @@ const tongtien = (data) => {
   return total;
 }
 function Order() {
-  const {setRender, render} = useAppNhaHang()
+  const {setRender, render, newSanpham} = useAppNhaHang()
 
   const { id } = useParams();
   const datagridRef = useRef();
-  const [sanpham, setSanpham] = useState(null)
   const [orderId, setOrderId] = useState(0)
   const [orderLenght, setLengthOrder] = useState(0)
   const [checkThanhtoan, setCheckthanhtoan] = useState(0)
   const [total, setTotal] = useState(1)
 
-
-  useEffect(() => {
-    const fetch = async() => {
-      const data = await CRUDSanpham('GET');
-      setSanpham(data)
-    }
-    fetch()
-  }, []);
 
   //mỗi khi vào chi tiết bàn thì kiểm tra nếu bàn đã order thì trả vè idOrder
   //ngược lại nếu chưa order thì tạo cho nó 1 order mới
@@ -61,13 +52,7 @@ function Order() {
 
   }, []);
 
-  const newSanpham = new DataSource({
-    store: {
-      type: "array",
-      key: "name",
-      data: sanpham
-    }
-  })
+
 
   const ordersData = new CustomStore({
       key: 'id',
