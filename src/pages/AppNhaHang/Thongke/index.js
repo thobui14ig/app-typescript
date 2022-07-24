@@ -24,7 +24,10 @@ function Thongke() {
   const [doanhthuthang, setDoanhthuthang] = useState(0)
   const [doanhthutuan, setDoanhthutuan] = useState(0)
   const [doanhthunam, setDoanhthunam] = useState(0)
+  const [currentCount, setCount] = useState(15);
+  const [render, setRender] = useState(false);
 
+  const timer = () => setCount(currentCount - 1);
 
 
   const onChangeMonth = (e) => {
@@ -40,7 +43,7 @@ function Thongke() {
     }
 
     fetch();
-  }, [currentYear])
+  }, [currentYear, render])
 
   useEffect(() => {
     const fetch = async() => {
@@ -49,7 +52,7 @@ function Thongke() {
     }
 
     fetch();
-  }, [month])
+  }, [month, render])
 
   useEffect(() => {
     const fetch = async() => {
@@ -57,29 +60,53 @@ function Thongke() {
         setDoanhthutuan(dataTuan);
     }
     fetch();
-  }, [])
+  }, [render])
+
+
+  useEffect(
+    () => {
+        if (currentCount <= 0) {
+          setCount(10)
+          wait()
+        }
+        const id = setInterval(timer, 1000);
+        return () => clearInterval(id);
+    },
+    [currentCount]
+  );
+
+  const wait = () => {
+    setTimeout(() => {
+      setRender(!render)
+    }, 2000);
+  }
 
   return (
-    <div className="flex-container thongke">
-      <div>
-        <p>Doanh thu tháng {month}:</p>
+    <>
+      <p>Tự động load lại sau {currentCount}s</p>
+      <div className="flex-container thongke">
+        
         <div>
-          <SelectBox items={monthArr} onValueChanged={onChangeMonth} value={month}/>
+          <p>Doanh thu tháng {month}:</p>
+          <div>
+            <SelectBox items={monthArr} onValueChanged={onChangeMonth} value={month}/>
+          </div>
+          <p>{doanhthuthang.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
         </div>
-        <p>{doanhthuthang.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
-      </div>
-      <div>
-        <p>Doanh thu tuần này:</p>
-        <p>{(doanhthutuan).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
-      </div>
-      <div>
-        <p>Doanh thu năm:</p>
         <div>
-          <SelectBox items={listYear}  onValueChanged={onChangeYear} value={currentYear}/>
+          <p>Doanh thu tuần này:</p>
+          <p>{(doanhthutuan).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
         </div>
-        <p>{(doanhthunam).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
-      </div>
-    </div>
+        <div>
+          <p>Doanh thu năm:</p>
+          <div>
+            <SelectBox items={listYear}  onValueChanged={onChangeYear} value={currentYear}/>
+          </div>
+          <p>{(doanhthunam).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</p>
+        </div>
+      </div>    
+    </>
+
   )
 }
 
